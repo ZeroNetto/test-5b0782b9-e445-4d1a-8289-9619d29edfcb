@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace FiguresAreaCalculatorTests.Figures;
 
 [TestFixture]
-public class TriangleAreaCalculationTests
+public class TriangleTests
 {
     [TestCase(8, 9, 6, 2, 23.53)]
     [TestCase(3, 4, 5, 1, 6.0)]
@@ -16,5 +16,14 @@ public class TriangleAreaCalculationTests
         var triangle = new Triangle(aSide, bSide, cSide, areaPrecision);
 
         triangle.CalculateArea().Should().Be(expectedValue);
+    }
+
+    [TestCase(3, 4, 5, true)]
+    [TestCase(1, 1, 1, false)]
+    public void IsRectangular_ReturnsAnswer(double aSide, double bSide, double cSide, bool expectedAnswer)
+    {
+        var triangle = new Triangle(aSide, bSide, cSide);
+
+        triangle.IsRectangular.Should().Be(expectedAnswer);
     }
 }

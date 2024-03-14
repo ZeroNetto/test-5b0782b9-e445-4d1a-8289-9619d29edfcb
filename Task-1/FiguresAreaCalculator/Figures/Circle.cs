@@ -2,7 +2,7 @@
 
 namespace FiguresAreaCalculator.Figures;
 
-public readonly struct Circle : IFigure
+public struct Circle : IFigure
 {
     public readonly double Radius;
 

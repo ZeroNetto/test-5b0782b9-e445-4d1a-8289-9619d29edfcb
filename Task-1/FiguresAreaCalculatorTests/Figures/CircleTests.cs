@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace FiguresAreaCalculatorTests.Figures;
 
 [TestFixture]
-public class CircleAreaCalculationTests
+public class CircleTests
 {
     [TestCase(8, 2, 201.06)]
     [TestCase(3, 1, 28.3)]
