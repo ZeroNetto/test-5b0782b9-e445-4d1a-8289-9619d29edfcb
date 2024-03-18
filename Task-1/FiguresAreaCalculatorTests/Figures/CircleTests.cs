@@ -11,8 +11,8 @@ public class CircleTests
     [TestCase(3, 1, 28.3)]
     public void Calculate_ReturnsCalculatedValue(double radius, int areaPrecision, double expectedValue)
     {
-        var triangle = new Circle(radius, areaPrecision);
+        var triangle = new Circle(radius);
 
-        triangle.CalculateArea().Should().Be(expectedValue);
+        triangle.CalculateArea(areaPrecision).Should().Be(expectedValue);
     }
 }

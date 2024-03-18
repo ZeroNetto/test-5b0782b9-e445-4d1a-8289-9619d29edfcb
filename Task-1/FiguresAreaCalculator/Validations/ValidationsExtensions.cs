@@ -20,4 +20,12 @@ public static class ValidationsExtensions
 
         return originalNumber;
     }
+
+    public static T IsGreaterOrEqualToZero<T>(this T originalNumber) where T : INumber<T>
+    {
+        if (originalNumber.CompareTo(T.Zero) < 0)
+            throw new ArgumentException($"Original number {originalNumber} should be equals or greater than zero");
+
+        return originalNumber;
+    }
 }

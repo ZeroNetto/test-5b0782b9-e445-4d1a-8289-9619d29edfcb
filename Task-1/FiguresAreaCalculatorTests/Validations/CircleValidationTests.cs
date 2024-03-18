@@ -14,12 +14,20 @@ public class CircleValidationTests
         action.Should().NotThrow<ArgumentException>();
     }
 
-    [TestCase(2, 0, "Original number 0 should be greater than zero")]
-    [TestCase(0, 2, "Original number 0 should be greater than zero")]
-    public void CreatingObject_Invalid_ThrowsArgumentException(double radius, int areaPrecision, string expectedMessage)
+    [Test]
+    public void CalculateArea_InvalidAreaPrecision_ThrowsArgumentException()
     {
-        var action = () => new Circle(radius, areaPrecision);
+        var action = () => new Triangle(5, 5, 5).CalculateArea(-1);
 
-        action.Should().Throw<ArgumentException>().WithMessage(expectedMessage);
+        action.Should().Throw<ArgumentException>()
+            .WithMessage("Original number -1 should be equals or greater than zero");
+    }
+
+    [Test]
+    public void CreatingObject_Invalid_ThrowsArgumentException()
+    {
+        var action = () => new Circle(0);
+
+        action.Should().Throw<ArgumentException>().WithMessage("Original number 0 should be greater than zero");
     }
 }

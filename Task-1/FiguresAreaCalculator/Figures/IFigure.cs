@@ -2,6 +2,5 @@
 
 public interface IFigure
 {
-    public int AreaPrecision { get; }
-    public double CalculateArea();
+    public double CalculateArea(int areaPrecision = 2);
 }

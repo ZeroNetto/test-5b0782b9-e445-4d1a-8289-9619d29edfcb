@@ -6,16 +6,15 @@ public struct Circle : IFigure
 {
     public readonly double Radius;
 
-    public Circle(double radius, int areaPrecision = 2)
+    public Circle(double radius)
     {
-        AreaPrecision = areaPrecision.IsGreaterThanZero();
         Radius = radius.IsGreaterThanZero();
     }
 
-    public int AreaPrecision { get; }
-
-    public double CalculateArea()
+    public double CalculateArea(int areaPrecision = 2)
     {
-        return Math.Round(Math.PI * Radius * Radius, AreaPrecision);
+        areaPrecision.IsGreaterOrEqualToZero();
+
+        return Math.Round(Math.PI * Radius * Radius, areaPrecision);
     }
 }

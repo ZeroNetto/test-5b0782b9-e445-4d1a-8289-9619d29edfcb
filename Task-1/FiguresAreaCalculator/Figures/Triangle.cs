@@ -7,7 +7,6 @@ public struct Triangle : IFigure
     public readonly double ASide;
     public readonly double BSide;
     public readonly double CSide;
-    public int AreaPrecision { get; }
     private bool? isRectangular = null;
 
     public bool IsRectangular
@@ -23,9 +22,8 @@ public struct Triangle : IFigure
         }
     }
 
-    public Triangle(double aSide, double bSide, double cSide, int areaPrecision = 2)
+    public Triangle(double aSide, double bSide, double cSide)
     {
-        AreaPrecision = areaPrecision.IsGreaterThanZero();
         ASide = aSide.IsGreaterThanZero();
         BSide = bSide.IsGreaterThanZero();
         CSide = cSide.IsGreaterThanZero();
@@ -33,13 +31,15 @@ public struct Triangle : IFigure
         IsValid();
     }
 
-    public double CalculateArea()
+    public double CalculateArea(int areaPrecision = 2)
     {
+        areaPrecision.IsGreaterOrEqualToZero();
+
         var semiPerimeter = (ASide + BSide + CSide) / 2;
 
         return Math.Round(
             Math.Sqrt(semiPerimeter * (semiPerimeter - ASide) * (semiPerimeter - BSide) * (semiPerimeter - CSide)),
-            AreaPrecision);
+            areaPrecision);
     }
 
     private void IsValid()

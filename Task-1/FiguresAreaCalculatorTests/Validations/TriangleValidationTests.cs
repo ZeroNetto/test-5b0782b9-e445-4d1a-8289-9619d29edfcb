@@ -15,33 +15,40 @@ public class TriangleValidationTests
         action.Should().NotThrow<ArgumentException>();
     }
 
-    [TestCaseSource(nameof(NegativeCases))]
-    public void CreatingObject(double aSide, double bSide, double cSide, int areaPrecision, string expectedMessage)
+    [TestCaseSource(nameof(Creating_NegativeCases))]
+    public void CreatingObject(double aSide, double bSide, double cSide, string expectedMessage)
     {
-        var action = () => new Triangle(aSide, bSide, cSide, areaPrecision);
+        var action = () => new Triangle(aSide, bSide, cSide);
 
         action.Should().Throw<ArgumentException>().WithMessage(expectedMessage);
     }
 
-    public static IEnumerable<TestCaseData> NegativeCases()
+    [Test]
+    public void CalculateArea_InvalidAreaPrecision_ThrowsArgumentException()
     {
-        yield return new TestCaseData(1, 2, 3, -1, "Original number -1 should be greater than zero").SetName(
-            $"{nameof(NegativeCases)}_ForNotPositive_ASide");
-        yield return new TestCaseData(0, 2, 3, 2, "Original number 0 should be greater than zero").SetName(
-            $"{nameof(NegativeCases)}_ForNotPositive_ASide");
-        yield return new TestCaseData(2, 0, 3, 2, "Original number 0 should be greater than zero").SetName(
-            $"{nameof(NegativeCases)}_ForNotPositive_BSide");
-        yield return new TestCaseData(2, 3, 0, 2, "Original number 0 should be greater than zero").SetName(
-            $"{nameof(NegativeCases)}_ForNotPositive_CSide");
+        var action = () => new Triangle(5, 5, 5).CalculateArea(-1);
+
+        action.Should().Throw<ArgumentException>()
+            .WithMessage("Original number -1 should be equals or greater than zero");
+    }
+
+    public static IEnumerable<TestCaseData> Creating_NegativeCases()
+    {
+        yield return new TestCaseData(0, 2, 3, "Original number 0 should be greater than zero").SetName(
+            $"{nameof(Creating_NegativeCases)}_ForNotPositive_ASide");
+        yield return new TestCaseData(2, 0, 3, "Original number 0 should be greater than zero").SetName(
+            $"{nameof(Creating_NegativeCases)}_ForNotPositive_BSide");
+        yield return new TestCaseData(2, 3, 0, "Original number 0 should be greater than zero").SetName(
+            $"{nameof(Creating_NegativeCases)}_ForNotPositive_CSide");
 
         yield return
-            new TestCaseData(8, 2, 3, 2, "Original number 8 should be less or equal to other number 5").SetName(
-                $"{nameof(NegativeCases)}_ForTooBig_ASide");
+            new TestCaseData(8, 2, 3, "Original number 8 should be less or equal to other number 5").SetName(
+                $"{nameof(Creating_NegativeCases)}_ForTooBig_ASide");
         yield return
-            new TestCaseData(2, 8, 3, 2, "Original number 8 should be less or equal to other number 5").SetName(
-                $"{nameof(NegativeCases)}_ForTooBig_BSide");
+            new TestCaseData(2, 8, 3, "Original number 8 should be less or equal to other number 5").SetName(
+                $"{nameof(Creating_NegativeCases)}_ForTooBig_BSide");
         yield return
-            new TestCaseData(2, 3, 8, 2, "Original number 8 should be less or equal to other number 5").SetName(
-                $"{nameof(NegativeCases)}_ForTooBig_CSide");
+            new TestCaseData(2, 3, 8, "Original number 8 should be less or equal to other number 5").SetName(
+                $"{nameof(Creating_NegativeCases)}_ForTooBig_CSide");
     }
 }

@@ -13,9 +13,9 @@ public class TriangleTests
     public void Calculate_ReturnsCalculatedValue(double aSide, double bSide, double cSide, int areaPrecision,
         double expectedValue)
     {
-        var triangle = new Triangle(aSide, bSide, cSide, areaPrecision);
+        var triangle = new Triangle(aSide, bSide, cSide);
 
-        triangle.CalculateArea().Should().Be(expectedValue);
+        triangle.CalculateArea(areaPrecision).Should().Be(expectedValue);
     }
 
     [TestCase(3, 4, 5, true)]
