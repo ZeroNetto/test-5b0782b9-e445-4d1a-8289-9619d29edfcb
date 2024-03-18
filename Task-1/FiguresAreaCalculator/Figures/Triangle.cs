@@ -16,7 +16,7 @@ public struct Triangle : IFigure
             if (isRectangular.HasValue) return isRectangular.Value;
 
             var sides = new[] {ASide, BSide, CSide}.OrderDescending().ToArray();
-            isRectangular = (sides[0] * sides[0]).CompareTo(sides[1] * sides[1] + sides[2] * sides[2]) == 0;
+            isRectangular = Math.Abs(sides[0] * sides[0] - (sides[1] * sides[1] + sides[2] * sides[2])) < double.Epsilon;
 
             return isRectangular.Value;
         }
